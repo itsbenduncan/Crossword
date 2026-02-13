@@ -156,3 +156,8 @@ function checkAnswers() {
 };
 
 generate_puzzle();
+
+window.visualViewport.addEventListener("resize", () => {
+    let clueBar = document.querySelector(".clue-bar");
+    clueBar.style.bottom = `${window.innerHeight - window.visualViewport.height}px`;
+});
