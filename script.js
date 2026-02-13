@@ -10,6 +10,9 @@ const puzzle = {
     answers: [
         ["#", "B", "E", "A", "N"],
         ["S", "P", "O", "O", "N"],
+        ["S", "P", "O", "O", "N"],
+        ["S", "P", "O", "O", "N"],
+        ["S", "P", "O", "O", "N"],
     ],
     clues: {
         across: {
@@ -48,6 +51,7 @@ function generate_puzzle() {
                 letterbox.classList.add('letterbox');
                 letterbox.setAttribute("data-row", r);
                 letterbox.setAttribute("data-col", c);
+                letterbox.setAttribute("maxlength", "1");
                 letterbox.addEventListener("click", handleCellClick);
                 letterbox.addEventListener("input", handleInput);
                 letterbox.addEventListener("keydown", handleKeydown);
@@ -55,6 +59,11 @@ function generate_puzzle() {
             };
         };
     };
+    let button = document.createElement('button');
+    button.textContent = "submit";
+    button.addEventListener("click", checkAnswers);
+    document.querySelector(".check-btn").appendChild(button);
+
 };
 
 function handleCellClick(e) {
@@ -152,7 +161,26 @@ function updateClueBar() {
 };
 
 function checkAnswers() {
+    let allCorrect = true;
+    let answers = puzzle.answers;
 
+    for (let answer=0; answer<answers.length; answer++) {
+        for (let letter=0; letter<answers[answer].length; letter++) {
+            if (answers[answer][letter] == "#") {
+                continue;
+            } else {
+                let inputAnswer = document.querySelector(`[data-row="${answer}"][data-col="${letter}"]`);
+                if (inputAnswer.value.toUpperCase() !== answers[answer][letter]) {
+                    allCorrect = false;
+                    inputAnswer.classList.add("incorrect");
+                }
+            }
+        }
+    }
+
+    if (allCorrect) {
+        window.location.href = "surprise.html";
+    }
 };
 
 generate_puzzle();
