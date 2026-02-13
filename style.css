@@ -1,0 +1,69 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 100vw;
+}
+
+.puzzle {
+    height: 70vw;
+    width: 70vw;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0px;
+    align-items: flex-start;
+}
+
+.letterbox {
+    width: 20%;
+    aspect-ratio: 1 / 1;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    box-sizing: border-box;
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.blackbox {
+    width: 20%;
+    aspect-ratio: 1 / 1;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    background-color: black;
+}
+
+.active-word {
+    background-color: khaki;
+}
+
+.active-cell {
+    background-color: lightseagreen;
+}
+
+.clue-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* add your styling — padding, background color, font size, etc. */
+}
+
+.check-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
