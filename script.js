@@ -38,6 +38,7 @@ let activeCol = null;
 let direction = "across";
 
 function generate_puzzle() {
+    document.querySelector(".instructions").remove();
     for (let r=0; r<puzzle.grid.length; r++) {
         for (let c=0; c<puzzle.grid[r].length; c++) {
             let cell = puzzle.grid[r][c];
@@ -187,9 +188,9 @@ function checkAnswers() {
     }
 };
 
-generate_puzzle();
-
 window.visualViewport.addEventListener("resize", () => {
     let clueBar = document.querySelector(".clue-bar");
     clueBar.style.bottom = `${window.innerHeight - window.visualViewport.height}px`;
 });
+
+// generate_puzzle();
