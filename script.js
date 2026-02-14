@@ -59,11 +59,14 @@ function generate_puzzle() {
             };
         };
     };
-    let button = document.createElement('button');
-    button.textContent = "submit";
-    button.addEventListener("click", checkAnswers);
-    document.querySelector(".check-btn").appendChild(button);
-
+    let outerButton = document.createElement('div');
+    outerButton.classList.add("btn");
+    document.querySelector(".check-btn").appendChild(outerButton);
+    let innerButton = document.createElement('div');
+    innerButton.textContent = "submit"
+    innerButton.classList.add("in_btn");
+    innerButton.addEventListener("click", checkAnswers);
+    document.querySelector(".btn").appendChild(innerButton);
 };
 
 function handleCellClick(e) {
@@ -150,7 +153,8 @@ function updateClueBar() {
     clues.forEach(clue => {
         if (direction == "across") {
             if (activeRow === clue.row && activeCol >= clue.col && activeCol <= (clue.col + clue.length)) {
-                clueBar.textContent = `${(clues.indexOf(clue) + 1)} ${direction}: ${clue.clue}`;
+                // clueBar.textContent = `${(clues.indexOf(clue) + 1)} ${direction}: ${clue.clue}`;
+                clueBar.textContent = `${clue.clue}`;
             }
         } else {
             if (activeCol === clue.col && activeRow >= clue.row && activeRow <= (clue.row + clue.length)) {
