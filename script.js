@@ -1,33 +1,33 @@
 const puzzle = {
     size: 5,
     grid: [
-        ["#", "", "", "", ""],
         ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
+        ["", "", "", "", "#"],
+        ["", "", "", "#", "#"],
+        ["", "", "", "", "#"],
+        ["", "", "", "#", "#"],
     ],
     answers: [
-        ["#", "B", "E", "A", "N"],
-        ["S", "P", "O", "O", "N"],
-        ["S", "P", "O", "O", "N"],
-        ["S", "P", "O", "O", "N"],
-        ["S", "P", "O", "O", "N"],
+        ["F", "A", "R", "E", "S"],
+        ["I", "D", "O", "L", "#"],
+        ["N", "O", "T", "#", "#"],
+        ["A", "R", "E", "A", "#"],
+        ["L", "E", "S", "#", "#"],
     ],
     clues: {
         across: {
-            1: { clue: "A single part of us", row: 0, col: 1, length: 4 },
-            2: { clue: "Said in a big voice", row: 1, col: 0, length: 5 },
-            3: { clue: "Said in a big voice", row: 2, col: 0, length: 5 },
-            4: { clue: "Said in a big voice", row: 3, col: 0, length: 5 },
-            5: { clue: "Said in a big voice", row: 4, col: 0, length: 5 },
+            1: { clue: "Costs for a ride", row: 0, col: 0, length: 5 },
+            2: { clue: "Object of worship", row: 1, col: 0, length: 4 },
+            3: { clue: "Used to negate a verb", row: 2, col: 0, length: 3 },
+            4: { clue: "length x width for rectangle", row: 3, col: 0, length: 4 },
+            5: { clue: "French for 'the'", row: 4, col: 0, length: 3 },
         },
         down: {
-            1: { clue: ". . . ", row: 0, col: 1, length: 5 },
-            2: { clue: ". . . ", row: 0, col: 2, length: 5 },
-            3: { clue: ". . . ", row: 0, col: 3, length: 5 },
-            4: { clue: ". . . ", row: 0, col: 4, length: 5 },
-            5: { clue: ". . . ", row: 1, col: 0, length: 5 },
+            1: { clue: "End", row: 0, col: 0, length: 5 },
+            2: { clue: "A feeling one bean has for another", row: 0, col: 1, length: 5 },
+            3: { clue: "Repetative practices", row: 0, col: 2, length: 5 },
+            4: { clue: "Use one across to ride in Chicago", row: 0, col: 3, length: 2 },
+            // 5: { clue: ". . . ", row: 1, col: 0, length: 5 },
         }
     }
 };
@@ -87,10 +87,30 @@ function handleInput(e) {
             activeCol += 1;
         } else if (direction === "down") {
             activeRow += 1;
-        };
+        }
 
-        highlightWord();
-        document.querySelector(`[data-row="${activeRow}"][data-col="${activeCol}"]`).focus();
+        let nextCell = document.querySelector(`[data-row="${activeRow}"][data-col="${activeCol}"]`);
+        if (nextCell) {
+            highlightWord();
+            nextCell.focus();
+        } else {
+            // Reset to the cell we were actually in
+            activeRow = parseInt(e.target.getAttribute("data-row"));
+            activeCol = parseInt(e.target.getAttribute("data-col"));
+            
+            // Now find which clue we're in and jump to the next one
+            let current = findCurrentClue();
+            let clueNums = Object.keys(puzzle.clues[direction]).map(Number).sort((a, b) => a - b);
+            let currentIndex = clueNums.indexOf(current.num);
+
+            if (currentIndex < clueNums.length - 1) {
+                let nextClue = puzzle.clues[direction][clueNums[currentIndex + 1]];
+                activeRow = nextClue.row;
+                activeCol = nextClue.col;
+                highlightWord();
+                document.querySelector(`[data-row="${activeRow}"][data-col="${activeCol}"]`).focus();
+            }
+        }
     }
 }
 
@@ -98,21 +118,58 @@ function handleKeydown(e) {
     activeRow = parseInt(e.target.getAttribute("data-row"));
     activeCol = parseInt(e.target.getAttribute("data-col"));
     if (e.key === "Backspace") {
-        if ( e.target.value !== "") {
+        if (e.target.value !== "") {
             e.target.value = "";
-            e.preventDefault()
+            e.preventDefault();
         } else {
             if (direction === "across") {
                 activeCol -= 1;
             } else if (direction === "down") {
                 activeRow -= 1;
-            };
+            }
 
-            highlightWord();
-            document.querySelector(`[data-row="${activeRow}"][data-col="${activeCol}"]`).focus();
-            e.preventDefault()
+            let prevCell = document.querySelector(`[data-row="${activeRow}"][data-col="${activeCol}"]`);
+            if (prevCell) {
+                highlightWord();
+                prevCell.focus();
+            } else {
+                // Previous cell doesn't exist — jump to previous clue
+                let current = findCurrentClue();
+                let clueNums = Object.keys(puzzle.clues[direction]).map(Number).sort((a, b) => a - b);
+                let currentIndex = clueNums.indexOf(current.num);
+
+                if (currentIndex > 0) {
+                    let prevClue = puzzle.clues[direction][clueNums[currentIndex - 1]];
+                    if (direction === "across") {
+                        activeRow = prevClue.row;
+                        activeCol = prevClue.col + prevClue.length - 1;
+                    } else {
+                        activeRow = prevClue.row + prevClue.length - 1;
+                        activeCol = prevClue.col;
+                    }
+                    highlightWord();
+                    document.querySelector(`[data-row="${activeRow}"][data-col="${activeCol}"]`).focus();
+                }
+            }
+            e.preventDefault();
         }
     }
+}
+
+function findCurrentClue() {
+    let clueEntries = Object.entries(puzzle.clues[direction]);
+    for (let [num, clue] of clueEntries) {
+        if (direction === "across") {
+            if (activeRow === clue.row && activeCol >= clue.col && activeCol < clue.col + clue.length) {
+                return { num: parseInt(num), clue };
+            }
+        } else {
+            if (activeCol === clue.col && activeRow >= clue.row && activeRow < clue.row + clue.length) {
+                return { num: parseInt(num), clue };
+            }
+        }
+    }
+    return null;
 }
 
 function highlightWord() {
@@ -184,9 +241,25 @@ function checkAnswers() {
     }
 
     if (allCorrect) {
-        window.location.href = "surprise.html";
+        for (let answer=0; answer<answers.length; answer++) {
+            for (let letter=0; letter<answers[answer].length; letter++) {
+                if (answers[answer][letter] == "#") {
+                    continue;
+                } else {
+                    document.querySelector(`[data-row="${answer}"][data-col="${letter}"]`).classList.add("correct");
+                }
+            }
+        }
+        setTimeout(() => {
+            document.querySelector(".yay").style.display = "block";
+        }, 1500);
     }
 };
+
+window.visualViewport.addEventListener("resize", () => {
+    let clueBar = document.querySelector(".clue-bar");
+    clueBar.style.bottom = `${window.innerHeight - window.visualViewport.height}px`;
+});
 
 window.visualViewport.addEventListener("resize", () => {
     let clueBar = document.querySelector(".clue-bar");

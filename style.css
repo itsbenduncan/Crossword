@@ -17,6 +17,9 @@ html, body {
 
     height: 100vh;
     width: 100vw;
+    background-image: url("pacific-breeze.png");
+    background-repeat: repeat;
+
 }
 
 .instructions {
@@ -30,6 +33,7 @@ html, body {
     width: 100%;
     top: 0px;
     left: 0px;
+    background-color: rgba(255,255,200,1)
 }
 
 .top {
@@ -141,4 +145,13 @@ button {
     -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+}
+
+.yay {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    font-size: 5em;
+    z-index: 10;
 }
