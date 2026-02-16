@@ -1,33 +1,33 @@
 const puzzle = {
     size: 5,
     grid: [
+        ["", "", "", "#", "#"],
+        ["", "", "", "", "#"],
         ["", "", "", "", ""],
-        ["", "", "", "", "#"],
-        ["", "", "", "#", "#"],
-        ["", "", "", "", "#"],
-        ["", "", "", "#", "#"],
+        ["#", "#", "", "", ""],
+        ["#", "#", "", "", ""],
     ],
     answers: [
-        ["F", "A", "R", "E", "S"],
-        ["I", "D", "O", "L", "#"],
-        ["N", "O", "T", "#", "#"],
-        ["A", "R", "E", "A", "#"],
-        ["L", "E", "S", "#", "#"],
+        ["E", "C", "0", "#", "#"],
+        ["M", "O", "R", "E", "#"],
+        ["S", "P", "A", "R", "K"],
+        ["#", "#", "T", "A", "I"],
+        ["#", "#", "E", "S", "T"],
     ],
     clues: {
         across: {
-            1: { clue: "Costs for a ride", row: 0, col: 0, length: 5 },
-            2: { clue: "Object of worship", row: 1, col: 0, length: 4 },
-            3: { clue: "Used to negate a verb", row: 2, col: 0, length: 3 },
-            4: { clue: "length x width for rectangle", row: 3, col: 0, length: 4 },
-            5: { clue: "French for 'the'", row: 4, col: 0, length: 3 },
+            1: { clue: "Green prefix", row: 0, col: 0, length: 3 },
+            2: { clue: "Oliver Twist's request", row: 1, col: 0, length: 4 },
+            3: { clue: "Burning feeling of connection", row: 2, col: 0, length: 5 },
+            4: { clue: "Country name with several martial arts", row: 3, col: 2, length: 3 },
+            5: { clue: "Abbr. for started", row: 4, col: 2, length: 3 },
         },
         down: {
-            1: { clue: "End", row: 0, col: 0, length: 5 },
-            2: { clue: "A feeling one bean has for another", row: 0, col: 1, length: 5 },
-            3: { clue: "Repetative practices", row: 0, col: 2, length: 5 },
-            4: { clue: "Use one across to ride in Chicago", row: 0, col: 3, length: 2 },
-            // 5: { clue: ". . . ", row: 1, col: 0, length: 5 },
+            1: { clue: "First on the scene, briefly", row: 0, col: 0, length: 3 },
+            2: { clue: "Slang name for douches in blue", row: 0, col: 1, length: 3 },
+            3: { clue: "Wax eloquent", row: 0, col: 2, length: 5 },
+            4: { clue: "Travis' domme's tour", row: 1, col: 3, length: 4 },
+            5: { clue: "Soccer uniform", row: 2, col: 4, length: 3 },
         }
     }
 };
