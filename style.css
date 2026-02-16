@@ -28,12 +28,19 @@ html, body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    align-content: center;
     text-align: center;
     height: 100%;
     width: 100%;
     top: 0px;
     left: 0px;
     background-color: rgba(255,255,200,1)
+}
+
+#title {
+    /* align-self: flex-start; */
+    font-weight: bold;
+    font-size: 1.5em;
 }
 
 .top {
@@ -108,6 +115,10 @@ button {
     background-color: rgba(255, 200, 175, 1);
 }
 
+.correct {
+    background-color: rgba(175,225,175,1);
+}
+
 .btn{
     /* position: fixed; */
     /* top: 50%;
@@ -150,8 +161,8 @@ button {
 .yay {
     display: none;
     position: fixed;
-    left: 50%;
-    top: 50%;
+    left: 40%;
+    top: 25%;
     font-size: 5em;
     z-index: 10;
 }
