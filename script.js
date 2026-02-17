@@ -92,7 +92,7 @@ function handleInput(e) {
         let nextCell = document.querySelector(`[data-row="${activeRow}"][data-col="${activeCol}"]`);
         if (nextCell) {
             highlightWord();
-            nextCell.focus();
+            nextCell.focus({ preventScroll: true });
         } else {
             // Reset to the cell we were actually in
             activeRow = parseInt(e.target.getAttribute("data-row"));
@@ -108,7 +108,7 @@ function handleInput(e) {
                 activeRow = nextClue.row;
                 activeCol = nextClue.col;
                 highlightWord();
-                document.querySelector(`[data-row="${activeRow}"][data-col="${activeCol}"]`).focus();
+                document.querySelector(`[data-row="${activeRow}"][data-col="${activeCol}"]`).focus({ preventScroll: true });
             }
         }
     }
@@ -131,7 +131,7 @@ function handleKeydown(e) {
             let prevCell = document.querySelector(`[data-row="${activeRow}"][data-col="${activeCol}"]`);
             if (prevCell) {
                 highlightWord();
-                prevCell.focus();
+                prevCell.focus({ preventScroll: true });
             } else {
                 // Previous cell doesn't exist — jump to previous clue
                 let current = findCurrentClue();
@@ -148,7 +148,7 @@ function handleKeydown(e) {
                         activeCol = prevClue.col;
                     }
                     highlightWord();
-                    document.querySelector(`[data-row="${activeRow}"][data-col="${activeCol}"]`).focus();
+                    document.querySelector(`[data-row="${activeRow}"][data-col="${activeCol}"]`).focus({ preventScroll: true });
                 }
             }
             e.preventDefault();
@@ -256,14 +256,13 @@ function checkAnswers() {
     }
 };
 
-window.visualViewport.addEventListener("resize", () => {
+function updateClueBarPosition() {
     let clueBar = document.querySelector(".clue-bar");
-    clueBar.style.bottom = `${window.innerHeight - window.visualViewport.height}px`;
-});
+    let offset = window.innerHeight - window.visualViewport.height - window.visualViewport.offsetTop;
+    clueBar.style.bottom = `${offset}px`;
+}
 
-window.visualViewport.addEventListener("resize", () => {
-    let clueBar = document.querySelector(".clue-bar");
-    clueBar.style.bottom = `${window.innerHeight - window.visualViewport.height}px`;
-});
+window.visualViewport.addEventListener("resize", updateClueBarPosition);
+window.visualViewport.addEventListener("scroll", updateClueBarPosition);
 
 // generate_puzzle();
