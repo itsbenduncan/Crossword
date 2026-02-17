@@ -256,10 +256,20 @@ function checkAnswers() {
     }
 };
 
+function updateLayout() {
+    let viewportHeight = window.visualViewport.height;
+    let puzzle = document.querySelector(".puzzle");
+    // Leave room for top spacer, clue bar, and submit button
+    let availableHeight = viewportHeight * 0.75;
+    puzzle.style.maxHeight = `${availableHeight}px`;
+    puzzle.style.width = `${availableHeight}px`; // keep it square-ish
+}
+
 function updateClueBarPosition() {
     let clueBar = document.querySelector(".clue-bar");
     let offset = window.innerHeight - window.visualViewport.height - window.visualViewport.offsetTop;
     clueBar.style.bottom = `${offset}px`;
+    updateLayout();
 }
 
 window.visualViewport.addEventListener("resize", updateClueBarPosition);
