@@ -1,0 +1,21 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Transparent background -->
+
+  <!-- 2x2 Checkered Grid (centered) -->
+  <rect x="96" y="96" width="160" height="160" fill="#000000"/>
+  <rect x="256" y="96" width="160" height="160" fill="#ffffff"/>
+  <rect x="96" y="256" width="160" height="160" fill="#ffffff"/>
+  <rect x="256" y="256" width="160" height="160" fill="#000000"/>
+
+  <!-- Centered Bean -->
+  <ellipse cx="256" cy="256" rx="85" ry="55"
+           fill="#6b3e26"
+           transform="rotate(-25 256 256)"/>
+
+  <!-- Bean crease -->
+  <path d="M230 220 Q256 256 230 292"
+        stroke="#4a2818"
+        stroke-width="8"
+        fill="none"
+        stroke-linecap="round"/>
+</svg>
