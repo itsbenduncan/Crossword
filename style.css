@@ -52,7 +52,7 @@ html, body {
 
 .puzzle {
     /* height: 50vw; */
-    width: 60vw;
+    width: 70vw;
 
     display: flex;
     flex-wrap: wrap;
@@ -98,6 +98,8 @@ html, body {
     /* add your styling — padding, background color, font size, etc. */
     background-color: white;
     text-align: center;
+    /* height: 5vh; */
+    fint-size: 1.25em;
 }
 
 .check-btn {

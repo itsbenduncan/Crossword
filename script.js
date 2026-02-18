@@ -1,33 +1,33 @@
 const puzzle = {
     size: 5,
     grid: [
-        ["", "", "", "#", "#"],
-        ["", "", "", "", "#"],
+        ["#", "#", "", "", ""],
+        ["#", "", "", "", ""],
         ["", "", "", "", ""],
-        ["#", "#", "", "", ""],
-        ["#", "#", "", "", ""],
+        ["", "", "", "", "#"],
+        ["", "", "", "#", "#"],
     ],
     answers: [
-        ["E", "C", "O", "#", "#"],
-        ["M", "O", "R", "E", "#"],
-        ["S", "P", "A", "R", "K"],
-        ["#", "#", "T", "A", "I"],
-        ["#", "#", "E", "S", "T"],
+        ["#", "#", "M", "A", "Y"],
+        ["#", "G", "A", "L", "A"],
+        ["R", "O", "P", "E", "S"],
+        ["U", "R", "L", "S", "#"],
+        ["E", "Y", "E", "#", "#"],
     ],
     clues: {
         across: {
-            1: { clue: "Green prefix", row: 0, col: 0, length: 3 },
-            2: { clue: "Oliver Twist's request", row: 1, col: 0, length: 4 },
-            3: { clue: "Burning feeling of connection", row: 2, col: 0, length: 5 },
-            4: { clue: "Country name with several martial arts", row: 3, col: 2, length: 3 },
-            5: { clue: "Abbr. for started", row: 4, col: 2, length: 3 },
+            1: { clue: "Could be 'might'", row: 0, col: 2, length: 3 },
+            2: { clue: "Red-carpet event", row: 1, col: 1, length: 4 },
+            3: { clue: "Hard hit baseballs", row: 2, col: 0, length: 5 },
+            4: { clue: "Digital addresses", row: 3, col: 0, length: 4 },
+            5: { clue: "Hurricane feature", row: 4, col: 0, length: 3 },
         },
         down: {
-            1: { clue: "First on the scene, briefly", row: 0, col: 0, length: 3 },
-            2: { clue: "Slang name for douches in blue", row: 0, col: 1, length: 3 },
-            3: { clue: "Wax eloquent", row: 0, col: 2, length: 5 },
-            4: { clue: "Travis' domme's tour", row: 1, col: 3, length: 4 },
-            5: { clue: "Soccer uniform", row: 2, col: 4, length: 3 },
+            1: { clue: "Extra Ru feeling if you add a letter", row: 2, col: 0, length: 3 },
+            2: { clue: "What you might consider a scene with broken glass", row: 1, col: 1, length: 4 },
+            3: { clue: "Leaf that accompanies a toronto mascot", row: 0, col: 2, length: 5 },
+            4: { clue: "We fancy them preceeded by IP", row: 0, col: 3, length: 4 },
+            5: { clue: "'___ queen!'", row: 0, col: 4, length: 3 },
         }
     }
 };
